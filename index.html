@@ -1,0 +1,104 @@
+<head>
+<title >Accessible Q-E range of 5G-PONTA</title>
+<link rel="stylesheet" type="text/css" href="./common.css">
+<script type="text/javascript" src="./PONTA_QErange.js?20220422"></script>
+</head>
+<body onload="draw()">
+    <div class="fullbox">
+    <table class="header_table">
+        <tr>
+            <td ><font class="mytitle">Accessible Q-E range of 5G PONTA</font> <font color="white">ver</font> <font color="white" id="verNum"></font></td>
+            <td class="menu_item"><a href="https://sites.google.com/g.ecc.u-tokyo.ac.jp/5g-ponta/" class="headerLink">5G-PONTA web site</a></td>
+            <td class="dummyText">-----</td>
+        </tr>
+    </table>
+    </div>
+<br />
+
+<div class="mainbody">
+
+
+<div class="dummy_space1" id="sec_Inst">-</div>
+<div class="dummy_space2">-</div>
+
+<div class="section_02">Instrument</div>
+<table>
+    <tr>
+        <td>
+            Two-theta range : <input type="text" size="6" id="D1_tth_min" value="2.0"> -  <input type="text" size="6" id="D1_tth_max" value="95.0"><br />
+            &omega; angle range :  <input type="text" size="5" id="omega1" value="-60"> - <input type="text" size="5" id="omega2" value="135"> degs <br />
+            <input type="button" value="   set   " onclick="draw()"/><br />
+            <br />
+            <img src="PONTA_layout_v1.png">
+        </td>
+    </tr>
+</table>
+<br />
+
+
+<div class="section_02">Sample</div>
+<table>
+    <tr>
+        <td width="380">
+            <b>Sample</b>
+        </td>
+        <td width="300">
+            <b><i>q</i>-vectors</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <i>a</i>* : <input type="text" size="6" id="a_star" value="1.5"> A<sup>-1</sup><br />
+            <i>b</i>* : <input type="text" size="6" id="b_star" value="1.5"> A<sup>-1</sup><br />
+            angle between <i>a</i>* and <i>b</i>* : <input type="text" size="6" id="gamma" value="90"> deg.<br />
+            &omega;<sub>offset</sub> : <input type="text" size="5" id="omg_ofst" value="0"> <br />
+            <input type="button" value="   set   " onclick="draw()"/><br />
+        </td>
+        <td>
+                <i>q</i><sub>1</sub> : <i>h</i> <input type="text" size="6" id="qh1" value="0">, <i>k</i> <input type="text" size="6" id="qk1" value="0"><br />
+                <i>q</i><sub>2</sub> : <i>h</i> <input type="text" size="6" id="qh2" value="0">, <i>k</i> <input type="text" size="6" id="qk2" value="0"><br />
+                <i>q</i><sub>3</sub> : <i>h</i> <input type="text" size="6" id="qh3" value="0">, <i>k</i> <input type="text" size="6" id="qk3" value="0"><br />
+                <input type="button" value="   set   " onclick="draw()"/><br />
+        </td>
+    </tr>
+</table>
+
+<br />
+
+<div class="section_02"><i>Q</i><sub>x</sub> - <i>Q</i><sub>y</sub> map</div>
+<table cellpadding="5">
+    <tr>
+        <td>
+            <canvas id="CanvasQxy1" width="500" height="500" class="box"></canvas>
+        </td>
+        <td valign="top">
+            <div class="section_03">Neutron energy </div>
+            <i>E</i><sub>f</sub> = <input type="text" size="6" id="Ef" value="14.7"> meV<br />
+            <!--Energy transfer : <input type="range" value="0" min="-0.4" max="0.9" step="0.01" id="frac_hbw1" oninput="draw()"><input size="10" value="0" id="hbw1"> meV<br /-->
+            <input type="button" value="   set   " onclick="draw()"/><br />
+            (Possible <i>E</i><sub>f</sub>s with a PG filter are 14.7 and 34 meV)<br />
+            <br />
+            <div class="section_03">Target reflection </div>
+            (<i>H</i><sub>t</sub>,<i>K</i><sub>t</sub>,<i>L</i><sub>t</sub>)=(<input size="5" id="Ht" value="0">,<input size="5" id="Kt" value="0">,0)<br />
+            <!--i>H</i><sub>t</sub> : <input type="text" size="6" id="Ht" value="0">, <i>K</i><sub>t</sub> <input type="text" size="6" id="Kt" value="0"><br /-->
+            <input type="button" value="   set   " onclick="draw()"/><br />
+            <br />
+            |<b>Q</b>|(=2&pi;/<i>d</i>) =<font id="Q_tgt"></font> A<sup>-1</sup><br />
+            2&theta; = <font id="tth_tgt"></font> deg<br />
+
+            <br />
+            <font color="50f050">Q-vector &rarr;</font><br />
+            <font color="f0c0a0"><i>k</i><sub>i</sub> &rarr;</font><br />
+            <font color="d0a080"><i>k</i><sub>f</sub> &rarr;</font><br />
+            Gray circles are Al peaks.
+
+        </td>
+    </tr>
+</table>
+<br />
+
+
+
+<div class="footer"> Version <font id="verNum2"></font> by <a href="https://nakajima.issp.u-tokyo.ac.jp">T. Nakajima</a>, 2022.</div>
+</div> <!--end of mainbody-->
+</body>
