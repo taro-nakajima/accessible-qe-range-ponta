@@ -8,7 +8,8 @@
     <table class="header_table">
         <tr>
             <td ><font class="mytitle">Accessible Q-E range of 5G PONTA</font> <font color="white">ver</font> <font color="white" id="verNum"></font></td>
-            <td class="menu_item"><a href="https://sites.google.com/g.ecc.u-tokyo.ac.jp/5g-ponta/" class="headerLink">5G-PONTA web site</a></td>
+            <td class="menu_item"><a href="https://sites.google.com/g.ecc.u-tokyo.ac.jp/5g-ponta/" class="headerLink" target="_blank">5G-PONTA web site</a></td>
+            <td class="menu_item"><a href="https://github.com/taro-nakajima/Accessible_QE_range_PONTA" class="headerLink" target="_blank">GitHub</a></td>
             <td class="dummyText">-----</td>
         </tr>
     </table>
@@ -51,10 +52,20 @@
             <i>a</i>* : <input type="text" size="6" id="a_star" value="1.5"> A<sup>-1</sup><br />
             <i>b</i>* : <input type="text" size="6" id="b_star" value="1.5"> A<sup>-1</sup><br />
             angle between <i>a</i>* and <i>b</i>* : <input type="text" size="6" id="gamma" value="90"> deg.<br />
+            Reflection condition 
+            <select id="RefCon" onchange="set_RefCon_and_draw()">
+                <option value="none" selected>none</option>
+                <option value="H+K=2n">H+K=2n</option>
+                <option value="H=2n">H=2n</option>
+                <option value="K=2n">K=2n</option>
+                <option value="H,K all even or all odd">H,K all even or all odd</option>
+                <option value="-H+K=3n">-H+K=3n</option>
+            </select><br />
+
             &omega;<sub>offset</sub> : <input type="text" size="5" id="omg_ofst" value="0"> <br />
             <input type="button" value="   set   " onclick="draw()"/><br />
         </td>
-        <td>
+        <td valign="top">
                 <i>q</i><sub>1</sub> : <i>h</i> <input type="text" size="6" id="qh1" value="0">, <i>k</i> <input type="text" size="6" id="qk1" value="0"><br />
                 <i>q</i><sub>2</sub> : <i>h</i> <input type="text" size="6" id="qh2" value="0">, <i>k</i> <input type="text" size="6" id="qk2" value="0"><br />
                 <i>q</i><sub>3</sub> : <i>h</i> <input type="text" size="6" id="qh3" value="0">, <i>k</i> <input type="text" size="6" id="qk3" value="0"><br />
