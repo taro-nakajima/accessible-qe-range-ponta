@@ -14,10 +14,13 @@ var T0_Chop_Const = 77.0/(2.0*Math.PI*300.0)*1000;     // (ms/Hz) cited from S. 
 
 var Al_d=[2.338124,2.024875,1.431803,1.221046,1.169062,1.012437, 0.929076,0.905552 ];
 
+var RefCon="none";
 
 function draw() {
     document.getElementById("verNum").innerHTML=version;
     document.getElementById("verNum2").innerHTML=version;
+
+    set_ReflectionCondition();
 
     draw_Qxy();
 
@@ -192,21 +195,23 @@ function draw_Qxy(){
         context3[p].fillStyle="rgb(50, 220, 50)";
         for (var h=-Hmax;h<=Hmax;h+=1){
             for (var k=-Kmax;k<=Kmax;k+=1){
-                //hkl+q
-                var PosY = originY-((h+qh[0])*a_star+(k+qk[0])*b_star*cosGamma)*scale[p];
-                var PosX = originX-((k+qk[0])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
-                }
-                //hkl-q
-                PosY = originY-((h-qh[0])*a_star+(k-qk[0])*b_star*cosGamma)*scale[p];
-                PosX = originX-((k-qk[0])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
+                if(check_ReflectionCondition(RefCon,h,k)){
+                    //hkl+q
+                    var PosY = originY-((h+qh[0])*a_star+(k+qk[0])*b_star*cosGamma)*scale[p];
+                    var PosX = originX-((k+qk[0])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
+                    //hkl-q
+                    PosY = originY-((h-qh[0])*a_star+(k-qk[0])*b_star*cosGamma)*scale[p];
+                    PosX = originX-((k-qk[0])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
                 }
             }
         }
@@ -215,21 +220,23 @@ function draw_Qxy(){
         context3[p].fillStyle="rgb(50, 150, 250)";
         for (var h=-Hmax;h<=Hmax;h+=1){
             for (var k=-Kmax;k<=Kmax;k+=1){
-                //hkl+q
-                var PosY = originY-((h+qh[1])*a_star+(k+qk[1])*b_star*cosGamma)*scale[p];
-                var PosX = originX-((k+qk[1])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
-                }
-                //hkl-q
-                PosY = originY-((h-qh[1])*a_star+(k-qk[1])*b_star*cosGamma)*scale[p];
-                PosX = originX-((k-qk[1])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
+                if(check_ReflectionCondition(RefCon,h,k)){
+                    //hkl+q
+                    var PosY = originY-((h+qh[1])*a_star+(k+qk[1])*b_star*cosGamma)*scale[p];
+                    var PosX = originX-((k+qk[1])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
+                    //hkl-q
+                    PosY = originY-((h-qh[1])*a_star+(k-qk[1])*b_star*cosGamma)*scale[p];
+                    PosX = originX-((k-qk[1])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
                 }
             }
         }
@@ -238,23 +245,24 @@ function draw_Qxy(){
         context3[p].fillStyle="rgb(250, 150, 100)";
         for (var h=-Hmax;h<=Hmax;h+=1){
             for (var k=-Kmax;k<=Kmax;k+=1){
-                //hkl+q
-                var PosY = originY-((h+qh[2])*a_star+(k+qk[2])*b_star*cosGamma)*scale[p];
-                var PosX = originX-((k+qk[2])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
+                if(check_ReflectionCondition(RefCon,h,k)){
+                    //hkl+q
+                    var PosY = originY-((h+qh[2])*a_star+(k+qk[2])*b_star*cosGamma)*scale[p];
+                    var PosX = originX-((k+qk[2])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
+                    //hkl-q
+                    PosY = originY-((h-qh[2])*a_star+(k-qk[2])*b_star*cosGamma)*scale[p];
+                    PosX = originX-((k-qk[2])*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }
                 }
-                //hkl-q
-                PosY = originY-((h-qh[2])*a_star+(k-qk[2])*b_star*cosGamma)*scale[p];
-                PosX = originX-((k-qk[2])*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
-                }
-
             }
         }
 
@@ -273,12 +281,14 @@ function draw_Qxy(){
 
         for (var h=-Hmax;h<=Hmax;h+=1){
             for (var k=-Kmax;k<=Kmax;k+=1){
-                var PosY = originY-(h*a_star+k*b_star*cosGamma)*scale[p];
-                var PosX = originX-(k*b_star*sinGamma)*scale[p];
-                if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
-                    context3[p].beginPath();
-                    context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
-                    context3[p].fill();
+                if(check_ReflectionCondition(RefCon,h,k)){
+                    var PosY = originY-(h*a_star+k*b_star*cosGamma)*scale[p];
+                    var PosX = originX-(k*b_star*sinGamma)*scale[p];
+                    if ((Math.abs(PosX-originX)<canvas3[p].width/2.0)&&(Math.abs(PosY-originY)<canvas3[p].height/2.0)){
+                        context3[p].beginPath();
+                        context3[p].arc(PosX,PosY, radius, 0, 2 * Math.PI);
+                        context3[p].fill();
+                    }    
                 }
             }
         }
@@ -473,6 +483,48 @@ function draw_Qxy(){
 
     }
 
-
-
 }
+
+function set_ReflectionCondition(){
+    RefCon = document.getElementById("RefCon").value;
+}
+
+function check_ReflectionCondition(RefCon,H,K){
+    var retstr=false;
+
+    switch(RefCon){
+        case 'none':
+            retstr=true;
+            break;
+        case 'H+K=2n':
+            if((H+K)%2==0){
+                retstr=true;
+            }
+            break;
+        case 'H=2n':
+            if((H)%2==0){
+                retstr=true;
+            }
+            break;
+        case 'K=2n':
+            if((K)%2==0){
+                retstr=true;
+            }
+            break;
+        case 'H,K all even or all odd':
+            let hklsp = Math.abs(H%2)+Math.abs(K%2);
+            if(hklsp==0||hklsp==3){
+                retstr=true;
+            }
+            break;
+        case '-H+K=3n':
+            if((-H+K)%3==0){
+                retstr=true;
+            }
+            break;
+        default:
+            retstr=true;
+    }
+    return retstr;
+}
+
