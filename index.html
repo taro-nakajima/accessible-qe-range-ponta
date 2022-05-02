@@ -35,7 +35,7 @@
 <table>
     <tr>
         <td>
-            Two-theta range : <input type="text" size="6" id="D1_tth_min" value="2.0"> -  <input type="text" size="6" id="D1_tth_max" value="95.0"><br />
+            2&theta; range : <input type="text" size="6" id="D1_tth_min" value="2.0"> -  <input type="text" size="6" id="D1_tth_max" value="95.0"><br />
             &omega; angle range :  <input type="text" size="5" id="omega1" value="-60"> - <input type="text" size="5" id="omega2" value="135"> degs <br />
             <input type="button" value="   set   " onclick="draw()"/><br />
             <br />
@@ -95,12 +95,15 @@
             <div class="section_03">Neutron energy </div>
             <i>E</i><sub>f</sub> = <input type="text" size="6" id="Ef" value="14.7"> meV<br />
             <!--Energy transfer : <input type="range" value="0" min="-0.4" max="0.9" step="0.01" id="frac_hbw1" oninput="draw()"><input size="10" value="0" id="hbw1"> meV<br /-->
+            &lambda; = <font id="lambda"></font>  A<br />
+            <i>k</i> = <font id="k_len"></font>  A<sup>-1</sup><br />
             <input type="button" value="   set   " onclick="draw()"/><br />
             (Possible <i>E</i><sub>f</sub>s with a PG filter are 14.7 and 34 meV)<br />
             <br />
             <div class="section_03">Target reflection </div>
             (<i>H</i><sub>t</sub>,<i>K</i><sub>t</sub>,<i>L</i><sub>t</sub>)=(<input size="5" id="Ht" value="0">,<input size="5" id="Kt" value="0">,0)<br />
             <!--i>H</i><sub>t</sub> : <input type="text" size="6" id="Ht" value="0">, <i>K</i><sub>t</sub> <input type="text" size="6" id="Kt" value="0"><br /-->
+            <input type="checkbox" id="cb_fix_ki_dir" onchange="draw()">Fix the incident direction.<br />
             <input type="button" value="   set   " onclick="draw()"/><br />
             <br />
             |<b>Q</b>|(=2&pi;/<i>d</i>) =<font id="Q_tgt"></font> A<sup>-1</sup><br />
@@ -110,7 +113,7 @@
             <font color="50f050">Q-vector &rarr;</font><br />
             <font color="f0c0a0"><i>k</i><sub>i</sub> &rarr;</font><br />
             <font color="d0a080"><i>k</i><sub>f</sub> &rarr;</font><br />
-            Gray circles are Al peaks.
+            Gray circles are powder rings of Al.
 
         </td>
     </tr>
