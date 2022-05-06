@@ -1,4 +1,4 @@
-const version = "1.1";
+const version = "1.2";
 const Ei_numMax=1;
 let Ei = new Array(Ei_numMax);
 const decimal_digit = 1000;
@@ -9,6 +9,9 @@ let tth_Min = new Array(DetBankNum);
 
 // d-values of Al peaks.
 const Al_d=[2.338124,2.024875,1.431803,1.221046,1.169062,1.012437, 0.929076,0.905552,0.826652,0.779375, 0.779375,0.715901];
+
+// d-values of PG002 and Heusler111
+const d_mono = [3.35416,3.435];
 
 let RefCon="none";
 
@@ -40,9 +43,23 @@ function draw_Qxy(){
     let Ef= Number(document.getElementById('Ef').value);
     let kf=Math.sqrt(Ef/2.072);
     let ki=kf;
+    let Q_mono = 2.0*Math.PI/d_mono[0];
 
     document.getElementById("lambda").innerHTML=Math.round((2.0*Math.PI/kf)*decimal_digit)/decimal_digit;
     document.getElementById("k_len").innerHTML=Math.round((kf)*decimal_digit)/decimal_digit;
+
+    if (document.getElementById('Mono').value == "PG"){
+        Q_mono = 2.0*Math.PI/d_mono[0];
+    }
+    else if(document.getElementById('Mono').value == "Heusler"){
+        Q_mono = 2.0*Math.PI/d_mono[1];
+    }
+
+    let A1 = Math.asin(Q_mono/2.0/ki)/Math.PI*180.0*2.0;
+    let C1 = A1/2.0;
+
+    document.getElementById("A1").innerHTML=Math.round(A1*decimal_digit)/decimal_digit;
+    document.getElementById("C1").innerHTML=Math.round(C1*decimal_digit)/decimal_digit;
 
     for (let j=0;j<Ei_numMax;j+=1){
         let labelCanvasQxy='CanvasQxy'+(Math.round(j+1));
@@ -58,18 +75,18 @@ function draw_Qxy(){
 
     }
 
-    var originX = canvas3[0].width/2.0;
-    var originY = canvas3[0].height/2.0;
+    let originX = canvas3[0].width/2.0;
+    let originY = canvas3[0].height/2.0;
    
-    var omg_1 = Number(document.getElementById('omega1').value);
-    var omg_2 = Number(document.getElementById('omega2').value);
-    var omg_ofst = Number(document.getElementById('omg_ofst').value);
+    let omg_1 = Number(document.getElementById('omega1').value);
+    let omg_2 = Number(document.getElementById('omega2').value);
+    let omg_ofst = Number(document.getElementById('omg_ofst').value);
 
-    var psi1 = -(omg_1-omg_ofst);
-    var psi2 = -(omg_2-omg_ofst);
+    let psi1 = -(omg_1-omg_ofst);
+    let psi2 = -(omg_2-omg_ofst);
 
     if (psi2 < psi1){
-        var temp_psi2 = psi2;
+        let temp_psi2 = psi2;
         psi2=psi1;
         psi1=temp_psi2;
     }
@@ -136,6 +153,10 @@ function draw_Qxy(){
         }
         document.getElementById("Q_tgt").innerHTML=Math.round(Qlen*decimal_digit)/decimal_digit;
         document.getElementById("tth_tgt").innerHTML=Math.round((tth_tgt/Math.PI*180.0)*decimal_digit)/decimal_digit;
+
+        document.getElementById("A2").innerHTML=Math.round((-tth_tgt/Math.PI*180.0)*decimal_digit)/decimal_digit;
+        document.getElementById("C2").innerHTML=Math.round(((-tth_tgt/2.0-alpha)/Math.PI*180.0-omg_ofst)*decimal_digit)/decimal_digit;
+
     }
         
 
