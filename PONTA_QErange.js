@@ -1,4 +1,4 @@
-const version = "1.2";
+const version = "1.3";
 const Ei_numMax=1;
 let Ei = new Array(Ei_numMax);
 const decimal_digit = 1000;
@@ -142,7 +142,7 @@ function draw_Qxy(){
         Qlen=Math.sqrt(Qx**2.0+Qy**2.0);
         cosAlpha=Qy/Qlen;
         sinAlpha=Qx/Qlen;
-        alpha=Math.atan(sinAlpha/cosAlpha);
+        alpha=Math.atan2(Qx,Qy);
         console.log(alpha);
         tth_tgt = Math.asin(Qlen/2.0/ki)*2.0;
         if(document.getElementById("cb_fix_ki_dir").checked){
@@ -236,7 +236,7 @@ function draw_Qxy(){
 
 
         //q-vector 1
-        context3[p].fillStyle="rgb(50, 220, 50)";
+        context3[p].fillStyle="rgb(80, 180, 250)";
         for (let h=-Hmax;h<=Hmax;h+=1){
             for (let k=-Kmax;k<=Kmax;k+=1){
                 if(check_ReflectionCondition(RefCon,h,k)){
@@ -265,7 +265,7 @@ function draw_Qxy(){
         }
 
         //q-vector 2
-        context3[p].fillStyle="rgb(50, 150, 250)";
+        context3[p].fillStyle="rgb(250, 150, 100)";
         for (let h=-Hmax;h<=Hmax;h+=1){
             for (let k=-Kmax;k<=Kmax;k+=1){
                 if(check_ReflectionCondition(RefCon,h,k)){
@@ -292,7 +292,7 @@ function draw_Qxy(){
         }
 
         //q-vector 3
-        context3[p].fillStyle="rgb(250, 150, 100)";
+        context3[p].fillStyle="rgb(50, 170, 50)";
         for (let h=-Hmax;h<=Hmax;h+=1){
             for (let k=-Kmax;k<=Kmax;k+=1){
                 if(check_ReflectionCondition(RefCon,h,k)){
