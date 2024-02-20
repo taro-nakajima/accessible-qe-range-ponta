@@ -37,7 +37,7 @@
         <td>
             2&theta; range : <input type="text" size="6" id="D1_tth_min" value="2.0"> -  <input type="text" size="6" id="D1_tth_max" value="95.0"><br />
             &omega; angle range :  <input type="text" size="5" id="omega1" value="-60"> - <input type="text" size="5" id="omega2" value="135"> degs <br />
-            <input type="button" value="   set   " onclick="draw()"/><br />
+            <input type="button" value="   set   " id="inst_parameters_button"/><br />
             <br />
             <img src="PONTA_layout_v1.png">
         </td>
@@ -72,13 +72,13 @@
             </select><br />
 
             &omega;<sub>offset</sub> : <input type="text" size="5" id="omg_ofst" value="0"> <br />
-            <input type="button" value="   set   " onclick="draw()"/><br />
+            <input type="button" value="   set   " id="sample_parameters_button"/><br />
         </td>
         <td valign="top">
                 <i>q</i><sub>1</sub> : <i>h</i> <input type="text" size="6" id="qh1" value="0">, <i>k</i> <input type="text" size="6" id="qk1" value="0"><br />
                 <i>q</i><sub>2</sub> : <i>h</i> <input type="text" size="6" id="qh2" value="0">, <i>k</i> <input type="text" size="6" id="qk2" value="0"><br />
                 <i>q</i><sub>3</sub> : <i>h</i> <input type="text" size="6" id="qh3" value="0">, <i>k</i> <input type="text" size="6" id="qk3" value="0"><br />
-                <input type="button" value="   set   " onclick="draw()"/><br />
+                <input type="button" value="   set   " id="q-vec_parameters_button"/><br />
         </td>
     </tr>
 </table>
@@ -94,7 +94,7 @@
         <td valign="top">
             <div class="section_03">Neutron energy </div>
             <i>E</i><sub>f</sub> = <input type="text" size="6" id="Ef" value="14.7"> meV, 
-            <select id="Mono" onchange="set_RefCon_and_draw()">
+            <select id="Mono" >
                 <option value="PG" selected>PG(002)</option>
                 <option value="Heusler" >Heusler(111)</option>
             </select>
@@ -103,13 +103,13 @@
             <input type="button" value="   set   " onclick="draw()"/><br />
             &lambda; = <font id="lambda"></font>  A, <i>k</i> = <font id="k_len"></font>  A<sup>-1</sup><br />
             A1 = <font id="A1"></font>  deg, C1 = <font id="C1"></font>  deg. <br />
-            (Possible <i>E</i><sub>f</sub>s with a PG filter are 14.7 and 34 meV)<br />
+            (Possible <i>E</i><sub>f</sub>s with a PG filter are 14.7, 30.5 and 34.05 meV)<br />
             <br />
             <div class="section_03">Target reflection </div>
             (<i>H</i><sub>t</sub>,<i>K</i><sub>t</sub>,<i>L</i><sub>t</sub>)=(<input size="5" id="Ht" value="0">,<input size="5" id="Kt" value="0">,0)<br />
             <!--i>H</i><sub>t</sub> : <input type="text" size="6" id="Ht" value="0">, <i>K</i><sub>t</sub> <input type="text" size="6" id="Kt" value="0"><br /-->
-            <input type="checkbox" id="cb_fix_ki_dir" onchange="draw()">Fix the incident direction.<br />
-            <input type="button" value="   set   " onclick="draw()"/><br />
+            <input type="checkbox" id="cb_fix_ki_dir" >Fix the incident direction.<br />
+            <input type="button" value="   set   " id="target_ref_set_button"/><br />
             <br />
             |<b>Q</b>|(=2&pi;/<i>d</i>) =<font id="Q_tgt"></font> A<sup>-1</sup><br />
             2&theta; = <font id="tth_tgt"></font> deg<br />
